@@ -6,12 +6,13 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:14:50 by chanypar          #+#    #+#             */
-/*   Updated: 2023/11/23 13:17:51 by chanypar         ###   ########.fr       */
+/*   Updated: 2023/11/24 11:33:57 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <fcntl.h>
+
 int	main(void)
 {
 	int	fd;
