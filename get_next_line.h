@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:06:02 by chanypar          #+#    #+#             */
-/*   Updated: 2023/11/24 21:32:00 by chanypar         ###   ########.fr       */
+/*   Updated: 2023/11/26 20:29:26 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,25 @@
 # include <stdlib.h>
 
 #ifndef BUFF_SIZE
-# define BUFF_SIZE
+# define BUFF_SIZE 5
 #endif
 
 char	*get_next_line(int fd);
 
+char	*put_res(char *buff);
+
+char	*check_res(char *stock, int i);
+
+char	*stock_clear(char **s_ptr);
+
 char	*ft_strchr(const char *s, int c);
 
-char	*ft_strjoin(char const *s1, char const s2);
+char	*ft_strjoin(char const *s1, char const *s2);
 
 char	*ft_strncpy(char *dest, char *src, unsigned int n);
+
+char	*ft_strdup(const char *s);
+
+size_t	ft_strlen(const char *str);
 
 #endif

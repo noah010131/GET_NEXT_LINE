@@ -6,58 +6,82 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 11:56:21 by chanypar          #+#    #+#             */
-/*   Updated: 2023/11/24 18:45:26 by chanypar         ###   ########.fr       */
+/*   Updated: 2023/11/26 21:40:26 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*put_res(char *str)
+char	*stock_clear(char **s_ptr)
 {
-	int		i;
-	static char	*dest;
+	char	*temp; // stock의 새 할당을 위함
+
+	temp = ft_strdup(*s_ptr);
+	while (**s_ptr)
+	{
+		**s_ptr = 0;
+		(*s_ptr)++;
+	}
+	free (*s_ptr);
+	while (*temp)
+	{
+		if (*temp == '\n') // '/n' 이 있다면 위 이후 복사
+		{
+			temp++;
+			*s_ptr = ft_strdup(temp);
+			free (temp);
+			return (*s_ptr);
+		}
+		temp++;
+	}
+	free (temp);
+	return (*s_ptr);
+}
+char	*check_res(char *stock, int i)
+{
+	char	**temp;
 	char	*res;
 
-	i = 0;
-	dest = malloc(BUFF_SIZE + 1); // 사이즈를 얼마로 줘야할까?
-	if (!dest)
-		return (0);
-	if (*dest) // dest에 값이 있다면 strjoin
-		ft_strjoin(dest, str);
-	else 
-		ft_strncpy(dest, str, BUFF_SIZE);
-	dest[BUFF_SIZE + 1] = '\0';
-	while (dest[i] && (dest[i] != '\n'))
-		i++;
-	res = malloc(i) //크기 할당
-	ft_strncpy(res, dest, i);	
-	free(dest);
-	return (res);
+	temp = NULL;
+	if ((i % BUFF_SIZE) == 0) // buff 맨 뒤에 '\0' 이 잘 저장되어 있다면
+		res = ft_strjoin(res, (char const *)stock);
+	else // buff 처음이나 중간에 '\n' 이나 '\0' 이 저장되어 있다면	
+	{
+		res = malloc(i + 1);
+		if (!res)
+			return (0);
+		res = ft_strncpy(res, stock, i); // '\n' 이나 '\0' 전까지 복사
+		stock = stock_clear(&stock);
+	}
+	*temp = res; // temp 에 복사
+	free(res);
+	return (*temp);
 }
 
-char	*stock_buff(char *buff)
+char	*put_res(char *buff)
 {
-	char	*res;
-//	char	*str;
-//	int	i;
+	int		i;
+	static char	*stock;
 
-//	i = 0;
-//	while (buff[i] && buff[i] != '\n')
-//		i++;
-//	str = (char *)malloc(i + 1);
-//	if (!str)
-// 		return (0);
-//	str = strncpy(str, buff, );
-	res = put_res(buff);
-	free(str); 
-	return (res);
-}	
+	i = 0;
+	if (stock == NULL)
+	{
+		stock = malloc(1);
+		if (!stock)
+			return (NULL);
+		stock = NULL;
+	}
+	stock = ft_strjoin(stock, (char const *)buff);
+	while (stock[i] && (stock[i] != '\n'))
+		i++;
+	return (check_res(stock, i));
+}
 
 char	*get_next_line(int fd)
 {
 	int	i;
-	int	size;
 	int	check_n;
+	char	*res;
 	char	buff[BUFF_SIZE + 1]; // 버퍼 할당 
 
 	i = BUFF_SIZE;
@@ -66,10 +90,12 @@ char	*get_next_line(int fd)
 		i = read(fd, buff, BUFF_SIZE);
 		if (i < 0)
 			return(NULL);
-		buff[i] ='\0';// 버퍼 맨 뒤 '\0' 할당
-		if (ft_strchr != NULL )
+		if (i == 0)
+			return (res);
+		buff[i] ='\0'; // 버퍼 맨 뒤 '\0' 할당
+		if (ft_strchr(buff, '\n') != NULL )
 			check_n = 1;
-		res = stock_buff(buff); // 버퍼의 값 저장    
+		res = put_res(buff); // 버퍼의 값 저장    
 	}
 	return (res);
 }

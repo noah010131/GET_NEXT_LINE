@@ -6,9 +6,23 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 21:07:32 by chanypar          #+#    #+#             */
-/*   Updated: 2023/11/24 21:20:55 by chanypar         ###   ########.fr       */
+/*   Updated: 2023/11/26 21:45:43 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "get_next_line.h"
+
+size_t	ft_strlen(const char *str)
+{
+	size_t	i;
+
+	i = 0;
+	if (!str)
+		return (0);
+	while (str[i])
+		i++;
+	return (i);
+}
 
 char	*ft_strchr(const char *s, int c)
 {
@@ -67,4 +81,20 @@ char	*ft_strncpy(char *dest, char *src, unsigned int n)
 	return (dest);
 }
 
+char	*ft_strdup(const char *s)
+{
+	char	*str;
+	int		i;
 
+	str = (char *)malloc(ft_strlen((const char *)s) + 1);
+	i = 0;
+	if (str == 0)
+		return (0);
+	while (s[i])
+	{
+		str[i] = s[i];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
+}

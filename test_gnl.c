@@ -6,26 +6,28 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:14:50 by chanypar          #+#    #+#             */
-/*   Updated: 2023/11/24 11:33:57 by chanypar         ###   ########.fr       */
+/*   Updated: 2023/11/26 20:51:26 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include <fcntl.h>
-
+#include <stdio.h>
+#include "get_next_line.h"
 int	main(void)
 {
 	int	fd;
-	int	bytes_read;
-	char	buff[100];
+	char	*res;
 
 	fd = open("test.c", O_RDONLY);
+	printf("fd : %d\n", fd);
 	if (fd < 0)
 		return (0);
-	bytes_read = read(fd, buff, sizeof(buff));
-	if (bytes_read < 0)
-		return (0);
-	write(1, buff, bytes_read);
+	do
+	{
+		res = get_next_line(fd);
+		printf("res : %s\n", res);
+	}
+	while (res);
 	close(fd);
 	return (0);
 }
