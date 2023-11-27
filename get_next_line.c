@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 11:56:21 by chanypar          #+#    #+#             */
-/*   Updated: 2023/11/27 15:34:30 by chanypar         ###   ########.fr       */
+/*   Updated: 2023/11/27 17:47:33 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*stock_clear(char **s_ptr)
 	i = 0;
 	while (temp[i])
 	{
-		if (temp[i] == '\n') // '/n' 이 있다면 위 이후 복사
+		if (temp[i] == '\n') // '\n' 이 있다면 위 이후 복사
 		{
 			i++;
 			*s_ptr = ft_strdup(temp + i);
@@ -63,6 +63,7 @@ char	*check_res(char *stock, int i)
 		res = malloc(i + 1);
 		if (!res)
 			return (0);
+		res[i] = '\0';
 		res = ft_strncpy(res, stock, i); // '\n' 이나 '\0' 전까지 복사
 		printf("1%s\n", res);
 		stock = stock_clear(&stock);
@@ -107,13 +108,13 @@ char	*get_next_line(int fd)
 		if (i < 0)
 			return(NULL);
 		if (i == 0)
-			return ("\0");
+			return (NULL);
 		buff[i] ='\0'; // 버퍼 맨 뒤 '\0' 할당
 		if (ft_strchr(buff, '\n') != NULL )
 			check_n = 1;
 		res = put_res(buff); // 버퍼의 값 저장    
 		printf("4%s\n", res);
 	}	
-	printf("5%s\n", res);
+	//printf("5%s\n", res);
 	return (res);
 }
