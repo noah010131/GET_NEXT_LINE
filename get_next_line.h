@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:06:02 by chanypar          #+#    #+#             */
-/*   Updated: 2023/11/26 20:29:26 by chanypar         ###   ########.fr       */
+/*   Updated: 2023/11/27 14:57:29 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,6 @@
 #endif
 
 char	*get_next_line(int fd);
-
-char	*put_res(char *buff);
-
-char	*check_res(char *stock, int i);
-
-char	*stock_clear(char **s_ptr);
 
 char	*ft_strchr(const char *s, int c);
 

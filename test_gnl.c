@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:14:50 by chanypar          #+#    #+#             */
-/*   Updated: 2023/11/26 20:51:26 by chanypar         ###   ########.fr       */
+/*   Updated: 2023/11/27 15:36:05 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,14 @@
 int	main(void)
 {
 	int	fd;
-	char	*res;
+	int	n;
 
 	fd = open("test.c", O_RDONLY);
 	printf("fd : %d\n", fd);
+	n = 0;
 	if (fd < 0)
 		return (0);
-	do
-	{
-		res = get_next_line(fd);
-		printf("res : %s\n", res);
-	}
-	while (res);
+        printf("%s\n", get_next_line(fd));
 	close(fd);
 	return (0);
 }

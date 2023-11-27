@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 21:07:32 by chanypar          #+#    #+#             */
-/*   Updated: 2023/11/26 21:45:43 by chanypar         ###   ########.fr       */
+/*   Updated: 2023/11/27 14:34:40 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (str == 0)
 		return (0);
 	res = str;
-	while (*s1)
+	while (len_s1 && *s1)
 	{
 		*str = *s1;
 		str++;
 		s1++;
 	}
-	while (*s2)
+	while (len_s2 && *s2)
 	{
 		*str = *s2;
 		str++;
@@ -85,7 +85,8 @@ char	*ft_strdup(const char *s)
 {
 	char	*str;
 	int		i;
-
+	if (!s)
+		return (NULL);
 	str = (char *)malloc(ft_strlen((const char *)s) + 1);
 	i = 0;
 	if (str == 0)
