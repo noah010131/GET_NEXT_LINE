@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 11:56:21 by chanypar          #+#    #+#             */
-/*   Updated: 2023/11/29 16:33:19 by chanypar         ###   ########.fr       */
+/*   Updated: 2023/11/29 17:41:13 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*check_res(char *stock, int i)
 	char	*res;
 
  	res = NULL;
-	if ((i % BUFF_SIZE) == 0 && i != 0) // buff 맨 뒤에 '\0' 이 잘 저장되어 있다면
+	if ((i % BUFFER_SIZE) == 0 && i != 0) // buff 맨 뒤에 '\0' 이 잘 저장되어 있다면
 		res = ft_strjoin(NULL, (char const *)stock);
 	else // buff 처음이나 중간에 '\n' 이나 '\0' 이 저장되어 있다면	
 	{
@@ -66,7 +66,7 @@ char	*check_res(char *stock, int i)
 		if (!res)
 			return (0);
 		ft_strncpy(res, stock, i + 1); // '\n' 까지  '\0' 전까지 복사
-		res[ft_strlen(res)] = '\0';
+		res[i + 1] = '\0';
 		stock = stock_clear(&stock);
 	}
 	return (free_res(res));
@@ -81,7 +81,7 @@ char	*put_res(char *buff)
 	i = 0;
 	if (stock == NULL)
 		stock = ft_strdup(buff);
-	else 
+	else if (buff != NULL) 
 		stock = ft_strjoin(stock, (char const *)buff);
 	while (stock[i] && (stock[i] != '\n'))
 		i++;
@@ -92,21 +92,28 @@ char	*put_res(char *buff)
 char	*get_next_line(int fd)
 {
 	int	i;
-	int	check_n;
+	static int	check_n;
 	char	*res;
-	char	buff[BUFF_SIZE + 1]; // 버퍼 할당 
+	char	buff[BUFFER_SIZE + 1]; // 버퍼 할당 
+	
 
-	i = BUFF_SIZE;
-	check_n = 0;
-	while (i == BUFF_SIZE && check_n == 0) 
+	res = NULL;
+	while (!(ft_count_c(res, '\n'))) // 받은 res안에 '\n'이 있으면 반환 
 	{
-		i = read(fd, buff, BUFF_SIZE);
+		i = BUFFER_SIZE + 1; // read 가 실행됬는 지 flag
+		if (check_n <= 0)
+			i = read(fd, buff, BUFFER_SIZE);
 		if (i <= 0)
 			return(NULL);
 		buff[i] ='\0'; // 버퍼 맨 뒤 '\0' 할당
-		if (ft_count_c(buff, '\n'))
-			check_n = 1;
-		res = put_res(buff); // 버퍼의 값 저장
+		if (i <= BUFFER_SIZE)//read 함수가 실행될 때
+		{
+			check_n = ft_count_c(buff, '\n');
+			res = put_res(buff); // 버퍼의 값 저장
+		}
+		else
+			res = put_res(NULL);
+		check_n--;
 	}
 	return (res);
 }

@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:06:02 by chanypar          #+#    #+#             */
-/*   Updated: 2023/11/29 15:10:29 by chanypar         ###   ########.fr       */
+/*   Updated: 2023/11/29 17:25:58 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-#ifndef BUFF_SIZE
-# define BUFF_SIZE 5
+#ifndef BUFFER_SIZE
+# define BUFFER_SIZE 5
 #endif
 
 char	*get_next_line(int fd);

@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 21:07:32 by chanypar          #+#    #+#             */
-/*   Updated: 2023/11/29 15:09:43 by chanypar         ###   ########.fr       */
+/*   Updated: 2023/11/29 17:27:30 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ int	ft_count_c(const char *s, int c)
 	int	i;
 
 	i = 0;
+	if (!s)
+		return (0);
 	while (*s)
 	{
 		if (*s == (char)c)
