@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 11:56:21 by chanypar          #+#    #+#             */
-/*   Updated: 2023/11/29 15:50:58 by chanypar         ###   ########.fr       */
+/*   Updated: 2023/11/29 16:33:19 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char	*put_res(char *buff)
 	i = 0;
 	if (stock == NULL)
 		stock = ft_strdup(buff);
-	else
+	else 
 		stock = ft_strjoin(stock, (char const *)buff);
 	while (stock[i] && (stock[i] != '\n'))
 		i++;
@@ -98,20 +98,15 @@ char	*get_next_line(int fd)
 
 	i = BUFF_SIZE;
 	check_n = 0;
-	while (i == BUFF_SIZE) 
+	while (i == BUFF_SIZE && check_n == 0) 
 	{
-		if (check_n == 0)
-			i = read(fd, buff, BUFF_SIZE);
-		else
-			check_n--;
+		i = read(fd, buff, BUFF_SIZE);
 		if (i <= 0)
 			return(NULL);
 		buff[i] ='\0'; // 버퍼 맨 뒤 '\0' 할당
-		if (check_n == 0)
-			check_n = ft_count_c(buff, '\n');
+		if (ft_count_c(buff, '\n'))
+			check_n = 1;
 		res = put_res(buff); // 버퍼의 값 저장
-		if (ft_count_c(res, '\n'))
-			return (res);
 	}
 	return (res);
 }
