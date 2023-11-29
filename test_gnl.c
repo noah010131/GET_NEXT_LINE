@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:14:50 by chanypar          #+#    #+#             */
-/*   Updated: 2023/11/27 17:30:45 by chanypar         ###   ########.fr       */
+/*   Updated: 2023/11/29 14:15:04 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ while (line)
 	i++;
 line = get_next_line(fd);
 }
-close(fd);
 free(line);
+close(fd);
   return (0);
 }

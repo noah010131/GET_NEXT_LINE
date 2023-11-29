@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 21:07:32 by chanypar          #+#    #+#             */
-/*   Updated: 2023/11/27 14:34:40 by chanypar         ###   ########.fr       */
+/*   Updated: 2023/11/29 15:09:43 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,18 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-char	*ft_strchr(const char *s, int c)
+int	ft_count_c(const char *s, int c)
 {
+	int	i;
+
+	i = 0;
 	while (*s)
 	{
 		if (*s == (char)c)
-			return ((char *)s);
+			i++;
 		s++;
 	}
-	if (*s == (char)c)
-		return ((char *)s);
-	return (NULL);
+	return (i);
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)
