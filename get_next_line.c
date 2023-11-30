@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 11:56:21 by chanypar          #+#    #+#             */
-/*   Updated: 2023/11/30 15:50:37 by chanypar         ###   ########.fr       */
+/*   Updated: 2023/11/30 17:04:19 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ char	*stock_clear(char *stock, int i)
 char	*free_res(char *res)
 {
 	char	*p;
-
 
 	p = ft_strdup(res);
 	free(res);
