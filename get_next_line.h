@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:06:02 by chanypar          #+#    #+#             */
-/*   Updated: 2023/12/01 12:42:16 by chanypar         ###   ########.fr       */
+/*   Updated: 2023/12/01 16:50:55 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,8 @@
 # include <stdlib.h>
 
 #ifndef BUFFER_SIZE
-# define BUFFER_SIZE 21
+# define BUFFER_SIZE 10000000
 #endif
-
 char	*get_next_line(int fd);
 
 int		ft_count_c(const char *s, int c);

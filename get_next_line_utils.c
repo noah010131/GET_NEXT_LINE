@@ -6,13 +6,12 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 21:07:32 by chanypar          #+#    #+#             */
-/*   Updated: 2023/12/01 13:07:45 by chanypar         ###   ########.fr       */
+/*   Updated: 2023/12/01 16:23:47 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <string.h>
-#include <stdio.h>
+
 size_t	ft_strlen(const char *str)
 {
 	size_t	i;
@@ -30,7 +29,7 @@ int	ft_count_c(const char *s, int c)
 	int	i;
 
 	i = 0;
-	if (!s)
+	if (s == NULL)
 		return (0);
 	while (*s)
 	{
@@ -98,6 +97,7 @@ char	*ft_strdup(const char *s)
 {
 	char	*str;
 	int		i;
+
 	if (!s)
 		return (NULL);
 	str = (char *)malloc((ft_strlen(s) + 1) * sizeof(char));
