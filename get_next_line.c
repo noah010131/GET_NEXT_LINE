@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 11:56:21 by chanypar          #+#    #+#             */
-/*   Updated: 2023/12/01 17:30:21 by chanypar         ###   ########.fr       */
+/*   Updated: 2023/12/01 19:48:58 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*put_res(char **stock, int i)
 	char	*res;
 
 	res = NULL;
-	if ((ft_count_c(*stock, '\n')))
+	if (ft_count_c(*stock, '\n')) // 뒤에 '\n'이 없는 텍스트도 다뤄야 함
 	{
 		res = ft_substr(*stock, 0, i + 1);
 		*stock = free_malloc(*stock, i);
@@ -80,7 +80,7 @@ char	*get_next_line(int fd)
 		if (check_n <= 0)
 			i = read(fd, buff, BUFFER_SIZE);
 		if (i <= 0)
-			return (NULL);
+			return (res);
 		buff[i] = '\0';
 		if (check_n > 0)
 			buff[0] = '\0';
