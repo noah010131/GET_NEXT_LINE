@@ -6,56 +6,38 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 11:56:21 by chanypar          #+#    #+#             */
-/*   Updated: 2023/11/30 17:04:19 by chanypar         ###   ########.fr       */
+/*   Updated: 2023/12/01 13:38:53 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
 
-char	*stock_clear(char *stock, int i)
+char	*free_malloc(char *arr, int i)
 {
-	char	*temp;  // stock의 새 할당을 위함
-	
-	temp = ft_strdup(stock);
-	free (stock);
-	stock = ft_strdup(temp + (i + 1));
+	char	*temp;
+
+	temp = ft_strdup(arr);
+	free (arr);
+	arr = ft_strdup(temp + (i + 1));
 	free (temp);
-	return (stock);
+	return (arr);
 }
 
-char	*free_res(char *res)
-{
-	char	*p;
-
-	p = ft_strdup(res);
-	free(res);
-	res = ft_strdup(p);
-	free(p);
-	return (res);
-	
-}
-
-char	*check_res(char **stock, int i)
+char	*put_res(char **stock, int i)
 {
 	char	*res;
 
  	res = NULL;
-	if (!(ft_count_c(*stock, '\n'))) // buff 맨 뒤에 '\0' 이 잘 저장되어 있다면
-		res = ft_strjoin(NULL, (char const *)stock);
-	else // buff 처음이나 중간에 '\n' 이나 '\0' 이 저장되어 있다면	
+	if ((ft_count_c(*stock, '\n'))) // buff 맨 뒤에 '\0' 이 잘 저장되어 있다면
 	{
-		res = malloc((i + 2) * sizeof(char));
-		if (!res)
-			return (0);
-		res = ft_strncpy(res, *stock, i + 1); // '\n' 까지  '\0' 전까지 복사
-		res[i + 1] = '\0';
-		*stock = stock_clear(*stock, i);
+		res = ft_substr(*stock, 0,  i + 1); // '\n' 까지  '\0' 전까지 복사
+		*stock = free_malloc(*stock, i);
 	}
-	return (free_res(res));
+	return (res);
 }
 
-char	*put_res(char *buff)
+char	*put_stock(char *buff)
 {
 	int		i;
 	static char	*stock;
@@ -73,7 +55,7 @@ char	*put_res(char *buff)
 	}
 	while (stock[i] && (stock[i] != '\n'))
 		i++;
-	res = check_res(&stock, i);
+	res = put_res(&stock, i);
 	return (res);
 }
 
@@ -93,11 +75,11 @@ char	*get_next_line(int fd)
 		if (i <= 0)
 			return(NULL);
 		buff[i] ='\0'; // 버퍼 맨 뒤 '\0' 할당
-		if (i > BUFFER_SIZE)//read 함수가 실행될 때
+		if (check_n > 0)//read 함수가 실행될 때
 			buff[0] = '\0';
 		else
 			check_n = ft_count_c(buff, '\n');
-		res = put_res(buff); // 버퍼의 값 저장
+		res = put_stock(buff); // 버퍼의 값 저장
 		check_n--;
 	}
 	return (res);

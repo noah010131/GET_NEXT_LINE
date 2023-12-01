@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:06:02 by chanypar          #+#    #+#             */
-/*   Updated: 2023/11/30 12:31:31 by chanypar         ###   ########.fr       */
+/*   Updated: 2023/12/01 12:42:16 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		ft_count_c(const char *s, int c);
 
 char	*ft_strjoin(char const *s1, char const *s2);
 
-char	*ft_strncpy(char *dest, char *src, unsigned int n);
+char    *ft_substr(char const *s, unsigned int start, size_t len);
 
 char	*ft_strdup(const char *s);
 

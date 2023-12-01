@@ -6,12 +6,13 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 21:07:32 by chanypar          #+#    #+#             */
-/*   Updated: 2023/11/29 17:27:30 by chanypar         ###   ########.fr       */
+/*   Updated: 2023/12/01 13:07:45 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-
+#include <string.h>
+#include <stdio.h>
 size_t	ft_strlen(const char *str)
 {
 	size_t	i;
@@ -69,19 +70,28 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (res);
 }
 
-char	*ft_strncpy(char *dest, char *src, unsigned int n)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	unsigned int		i;
-	
+	char	*str;
+	size_t	i;
+
+	if (start >= ft_strlen(s))
+		len = 0;
+	else if (len > ft_strlen(s + start))
+		len = ft_strlen(s + start);
+	str = (char *)malloc(len + 1);
 	i = 0;
-	while (*(src + i) && i < n)
+	if (str == 0)
+		return (0);
+	while (len != 0 && s[start])
 	{
-		*(dest + i) = *(src + i);
+		str[i] = s[start];
+		start++;
 		i++;
+		len--;
 	}
-	if (i < n)
-		*(dest + i) = '\0';
-	return (dest);
+	str[i] = '\0';
+	return (str);
 }
 
 char	*ft_strdup(const char *s)
@@ -90,7 +100,7 @@ char	*ft_strdup(const char *s)
 	int		i;
 	if (!s)
 		return (NULL);
-	str = (char *)malloc(ft_strlen((const char *)s) + 1);
+	str = (char *)malloc((ft_strlen(s) + 1) * sizeof(char));
 	i = 0;
 	if (str == 0)
 		return (0);
