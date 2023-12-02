@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jdecorte <jdecorte@student.42.fr>          +#+  +:+       +#+        */
+/*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/19 11:14:11 by jdecorte          #+#    #+#             */
-/*   Updated: 2023/12/02 12:52:59 by chanypar         ###   ########.fr       */
+/*   Created: 2023/12/02 15:08:52 by chanypar          #+#    #+#             */
+/*   Updated: 2023/12/02 16:41:13 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,24 +41,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (res);
 }
 
-char	*ft_strdup(const char *s)
-{
-	char	*str;
-	int		i;
-
-	str = (char *)malloc(ft_strlen((const char *)s) + 1);
-	i = 0;
-	if (str == 0)
-		return (0);
-	while (s[i])
-	{
-		str[i] = s[i];
-		i++;
-	}
-	str[i] = '\0';
-	return (str);
-}
-
 char	*ft_strchr(const char *s, int c)
 {
 	char	*str;
@@ -72,12 +54,11 @@ char	*ft_strchr(const char *s, int c)
 		return (NULL);
 }
 
-
 void	*ft_calloc(size_t nmenb, size_t size)
 {
 	char	*res;
-	int	s;
-	int	i;
+	int		s;
+	int		i;
 
 	s = nmenb * size;
 	res = malloc(s);

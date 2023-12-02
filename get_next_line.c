@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 11:46:45 by chanypar          #+#    #+#             */
-/*   Updated: 2023/12/02 14:13:19 by chanypar         ###   ########.fr       */
+/*   Updated: 2023/12/02 16:40:21 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 char	*put_stock(char *stock)
 {
 	int		i;
+	int		j;
 	char	*res;
 
 	i = 0;
@@ -25,7 +26,11 @@ char	*put_stock(char *stock)
 		free(stock);
 		return (NULL);
 	}
-	res = ft_strdup(stock + (i + 1));
+	i++;
+	res = ft_calloc((ft_strlen(stock) - i + 1), 1);
+	j = 0;
+	while (stock[i])
+		res[j++] = stock[i++];
 	free(stock);
 	return (res);
 }
@@ -57,10 +62,7 @@ char	*put_res(char *stock)
 		i++;
 	}
 	if (stock[i] && stock[i] == '\n')
-	{
 		res[i] = '\n';
-		i++;
-	}
 	return (res);
 }
 
@@ -71,7 +73,12 @@ char	*read_buff(int fd, char *stock)
 
 	temp = ft_calloc(BUFFER_SIZE + 1, 1);
 	if (stock == NULL)
-		stock = ft_calloc(1, 1);
+	{
+		stock = malloc(1);
+		if (!stock)
+			return (NULL);
+		stock[0] = '\0';
+	}
 	i = 1;
 	while (i > 0 && (!(ft_strchr(temp, '\n'))))
 	{
@@ -88,9 +95,7 @@ char	*get_next_line(int fd)
 	static char	*stock;
 	char		*res;
 
-	if (BUFFER_SIZE <= 0)
-		return (NULL);
-	else if(read(fd, 0, 0) < 0)
+	if (BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 		return (NULL);
 	stock = read_buff(fd, stock);
 	if (!stock)
