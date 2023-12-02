@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 11:46:45 by chanypar          #+#    #+#             */
-/*   Updated: 2023/12/02 16:40:21 by chanypar         ###   ########.fr       */
+/*   Updated: 2023/12/02 18:07:20 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,22 +35,49 @@ char	*put_stock(char *stock)
 	return (res);
 }
 
-char	*free_malloc(char *stock, char *buff)
+char	*free_malloc(char **stock, char *buff)
 {
 	char	*temp;
 
-	temp = ft_strjoin(stock, buff);
-	free(stock);
+	temp = ft_strjoin(*stock, buff);
+	free(*stock);
 	return (temp);
 }
 
-char	*put_res(char *stock)
+void	read_buff(int fd, char **stock)
 {
-	char	*res;
+	char	*temp;
 	int		i;
 
+	temp = ft_calloc(BUFFER_SIZE + 1, 1);
+	if (!*stock)
+	{
+		*stock = malloc(1);
+		if (!*stock)
+			return ;
+		*stock[0] = '\0';
+	}
+	i = 1;
+	while (i > 0 && (!(ft_strchr(temp, '\n'))))
+	{
+		i = read(fd, temp, BUFFER_SIZE);
+		temp[i] = 0;
+		*stock = free_malloc(stock, temp);
+	}
+	free(temp);
+}
+
+char	*get_next_line(int fd)
+{
+	static char	*stock;
+	char		*res;
+	int			i;
+
+	if (BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+		return (NULL);
+	read_buff(fd, &stock);
 	i = 0;
-	if (!stock[i])
+	if (!stock || !stock[i])
 		return (NULL);
 	while (stock[i] && stock[i] != '\n')
 		i++;
@@ -63,44 +90,6 @@ char	*put_res(char *stock)
 	}
 	if (stock[i] && stock[i] == '\n')
 		res[i] = '\n';
-	return (res);
-}
-
-char	*read_buff(int fd, char *stock)
-{
-	char	*temp;
-	int		i;
-
-	temp = ft_calloc(BUFFER_SIZE + 1, 1);
-	if (stock == NULL)
-	{
-		stock = malloc(1);
-		if (!stock)
-			return (NULL);
-		stock[0] = '\0';
-	}
-	i = 1;
-	while (i > 0 && (!(ft_strchr(temp, '\n'))))
-	{
-		i = read(fd, temp, BUFFER_SIZE);
-		temp[i] = 0;
-		stock = free_malloc(stock, temp);
-	}
-	free(temp);
-	return (stock);
-}
-
-char	*get_next_line(int fd)
-{
-	static char	*stock;
-	char		*res;
-
-	if (BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
-		return (NULL);
-	stock = read_buff(fd, stock);
-	if (!stock)
-		return (NULL);
-	res = put_res(stock);
 	stock = put_stock(stock);
 	return (res);
 }
