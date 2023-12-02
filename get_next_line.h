@@ -3,32 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jdecorte <jdecorte@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/23 12:06:02 by chanypar          #+#    #+#             */
-/*   Updated: 2023/12/01 18:26:44 by chanypar         ###   ########.fr       */
+/*   Created: 2021/10/19 11:15:27 by jdecorte          #+#    #+#             */
+/*   Updated: 2023/12/02 14:02:07 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-# include <unistd.h>
 # include <stdlib.h>
+# include <unistd.h>
 
 #ifndef BUFFER_SIZE
-# define BUFFER_SIZE 42
+# define BUFFER_SIZE 1000000
 #endif
+
 char	*get_next_line(int fd);
 
-int		ft_count_c(const char *s, int c);
+char    *ft_strchr(const char *s, int c);
 
-char	*ft_strjoin(char const *s1, char const *s2);
+void    *ft_calloc(size_t nmenb, size_t size);
 
-char    *ft_substr(char const *s, unsigned int start, size_t len);
+size_t  ft_strlen(const char *str);
 
-char	*ft_strdup(const char *s);
+char    *ft_strdup(const char *s);
 
-size_t	ft_strlen(const char *str);
+char    *ft_strjoin(char const *s1, char const *s2);
 
 #endif
