@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 11:46:45 by chanypar          #+#    #+#             */
-/*   Updated: 2023/12/03 13:10:15 by chanypar         ###   ########.fr       */
+/*   Updated: 2023/12/03 13:09:32 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*put_stock(char *stock)
 {
@@ -75,27 +75,27 @@ char	*read_buff(int fd, char *stock)
 
 char	*get_next_line(int fd)
 {
-	static char	*stock;
+	static char	*stock[4096];
 	char		*res;
 	int			i;
 
 	if (BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 		return (NULL);
-	stock = read_buff(fd, stock);
+	stock[fd] = read_buff(fd, stock[fd]);
 	i = 0;
-	if (!stock || !stock[i])
+	if (!stock[fd] || !stock[fd][i])
 		return (NULL);
-	while (stock[i] && stock[i] != '\n')
+	while (stock[fd][i] && stock[fd][i] != '\n')
 		i++;
 	res = ft_calloc(i + 2, 1);
 	i = 0;
-	while (stock[i] && stock[i] != '\n')
+	while (stock[fd][i] && stock[fd][i] != '\n')
 	{
-		res[i] = stock[i];
+		res[i] = stock[fd][i];
 		i++;
 	}
-	if (stock[i] && stock[i] == '\n')
+	if (stock[fd][i] && stock[fd][i] == '\n')
 		res[i] = '\n';
-	stock = put_stock(stock);
+	stock[fd] = put_stock(stock[fd]);
 	return (res);
 }
