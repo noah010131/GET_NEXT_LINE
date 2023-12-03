@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 12:51:14 by chanypar          #+#    #+#             */
-/*   Updated: 2023/12/03 13:08:13 by chanypar         ###   ########.fr       */
+/*   Updated: 2023/12/03 21:27:41 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-# include <limits.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1
