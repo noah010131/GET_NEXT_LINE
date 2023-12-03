@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 11:46:45 by chanypar          #+#    #+#             */
-/*   Updated: 2023/12/03 21:14:39 by chanypar         ###   ########.fr       */
+/*   Updated: 2023/12/03 21:37:07 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char	*read_buff(int fd, char *stock)
 
 char	*get_next_line(int fd)
 {
-	static char	*stock[4096];
+	static char	*stock[1024];
 	char		*res;
 	int			i;
 
