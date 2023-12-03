@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 11:46:45 by chanypar          #+#    #+#             */
-/*   Updated: 2023/12/03 13:09:32 by chanypar         ###   ########.fr       */
+/*   Updated: 2023/12/03 21:14:39 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,16 +84,17 @@ char	*get_next_line(int fd)
 	stock[fd] = read_buff(fd, stock[fd]);
 	i = 0;
 	if (!stock[fd] || !stock[fd][i])
+	{
+		free(stock[fd]);
+		stock[fd] = NULL;
 		return (NULL);
+	}
 	while (stock[fd][i] && stock[fd][i] != '\n')
 		i++;
 	res = ft_calloc(i + 2, 1);
-	i = 0;
-	while (stock[fd][i] && stock[fd][i] != '\n')
-	{
+	i = -1;
+	while (stock[fd][++i] && stock[fd][i] != '\n')
 		res[i] = stock[fd][i];
-		i++;
-	}
 	if (stock[fd][i] && stock[fd][i] == '\n')
 		res[i] = '\n';
 	stock[fd] = put_stock(stock[fd]);

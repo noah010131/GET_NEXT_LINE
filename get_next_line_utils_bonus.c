@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 15:08:52 by chanypar          #+#    #+#             */
-/*   Updated: 2023/12/03 13:09:42 by chanypar         ###   ########.fr       */
+/*   Updated: 2023/12/03 21:23:47 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,6 @@ void	*ft_calloc(size_t nmenb, size_t size)
 	{
 		res[i] = '\0';
 		i++;
-	}	
+	}
 	return (res);
 }
