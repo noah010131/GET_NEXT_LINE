@@ -6,7 +6,7 @@
 /*   By: chanypar <chanypar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 15:08:34 by chanypar          #+#    #+#             */
-/*   Updated: 2023/12/03 12:45:10 by chanypar         ###   ########.fr       */
+/*   Updated: 2023/12/04 16:54:08 by chanypar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ char	*ft_strchr(const char *s, int c);
 void	*ft_calloc(size_t nmenb, size_t size);
 
 size_t	ft_strlen(const char *str);
-
-char	*ft_strdup(const char *s);
 
 char	*ft_strjoin(char const *s1, char const *s2);
 
